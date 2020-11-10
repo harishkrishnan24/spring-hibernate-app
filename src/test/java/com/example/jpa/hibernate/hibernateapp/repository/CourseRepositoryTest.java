@@ -4,6 +4,7 @@ import com.example.jpa.hibernate.hibernateapp.entity.Course;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,5 +18,13 @@ class CourseRepositoryTest {
     void findCourseById() {
         Course course = courseRepository.findById(10001L);
         assertEquals("JPA in 50 Steps", course.getName());
+    }
+
+    @Test
+    @DirtiesContext
+    void deleteCourseById() {
+        courseRepository.deleteById(10002L);
+
+        assertNull(courseRepository.findById(10002L));
     }
 }
