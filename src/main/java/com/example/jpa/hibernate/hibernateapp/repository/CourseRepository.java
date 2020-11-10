@@ -3,10 +3,12 @@ package com.example.jpa.hibernate.hibernateapp.repository;
 import com.example.jpa.hibernate.hibernateapp.entity.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @Repository
+@Transactional
 public class CourseRepository {
 
     @Autowired
@@ -19,6 +21,8 @@ public class CourseRepository {
 //    public Course save(Course course) {
 //    }
 
-//    public void deleteById(Long id) {
-//    }
+    public void deleteById(Long id) {
+        Course course = findById(id);
+        entityManager.remove(course);
+    }
 }

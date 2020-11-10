@@ -25,5 +25,8 @@ public class HibernateAppApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Course course = courseRepository.findById(10001L);
         logger.info(course.toString());
+
+        courseRepository.deleteById(10001L);
+
     }
 }
