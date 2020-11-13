@@ -23,10 +23,10 @@ public class HibernateAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Course course = courseRepository.findById(10001L);
-        logger.info(course.toString());
-
-        courseRepository.save(new Course("Microservices in 100 Steps"));
-
+//        Course course = courseRepository.findById(10001L);
+//        logger.info(course.toString());
+//
+//        courseRepository.save(new Course("Microservices in 100 Steps"));
+        courseRepository.playWithEntityManager();
     }
 }

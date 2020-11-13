@@ -39,4 +39,10 @@ class CourseRepositoryTest {
 
         assertNull(courseRepository.findById(10002L));
     }
+
+    @Test
+    @DirtiesContext
+    void playWithEntityManager() {
+        courseRepository.playWithEntityManager();
+    }
 }
