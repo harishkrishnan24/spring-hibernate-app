@@ -3,13 +3,14 @@ package com.example.jpa.hibernate.hibernateapp.entity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "query_get_100_Step_courses", query = "select c from Course c where name like '%100'")
+})
 public class Course {
     @Id
     @GeneratedValue

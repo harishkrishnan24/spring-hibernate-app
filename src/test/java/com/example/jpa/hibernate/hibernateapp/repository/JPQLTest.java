@@ -26,20 +26,20 @@ class JPQLTest {
 
     @Test
     void findCourses() {
-        List resultList = entityManager.createQuery("select c from Course c").getResultList();
+        List resultList = entityManager.createNamedQuery("query_get_all_courses").getResultList();
         logger.info("select c from Course c -> {}", resultList);
     }
 
     @Test
     void findCoursesTyped() {
-        TypedQuery<Course> query = entityManager.createQuery("select c from Course c", Course.class);
+        TypedQuery<Course> query = entityManager.createNamedQuery("query_get_all_courses", Course.class);
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c -> {}", resultList);
     }
 
     @Test
     void findCoursesTypedWhere() {
-        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where name like '%100'", Course.class);
+        TypedQuery<Course> query = entityManager.createNamedQuery("query_get_100_Step_courses", Course.class);
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c -> {}", resultList);
     }
