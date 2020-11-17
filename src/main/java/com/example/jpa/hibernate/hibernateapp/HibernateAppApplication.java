@@ -2,6 +2,7 @@ package com.example.jpa.hibernate.hibernateapp;
 
 import com.example.jpa.hibernate.hibernateapp.entity.Course;
 import com.example.jpa.hibernate.hibernateapp.entity.Review;
+import com.example.jpa.hibernate.hibernateapp.entity.Student;
 import com.example.jpa.hibernate.hibernateapp.repository.CourseRepository;
 import com.example.jpa.hibernate.hibernateapp.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -32,9 +33,12 @@ public class HibernateAppApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        studentRepository.saveStudentWithPassport();
 //        courseRepository.playWithEntityManager();
-        var reviews = new ArrayList<Review>();
-        reviews.add(new Review("5", "Great Hands on stuff"));
-        reviews.add(new Review("5", "Hats off!"));
-        courseRepository.addReviewsForCourse(10003L, reviews);
+//        var reviews = new ArrayList<Review>();
+//        reviews.add(new Review("5", "Great Hands on stuff"));
+//        reviews.add(new Review("5", "Hats off!"));
+//        courseRepository.addReviewsForCourse(10003L, reviews);
+        Student student = new Student("Jack");
+        Course course = new Course("Microservices");
+        studentRepository.insertStudentAndCourse(student, course);
     }
 }

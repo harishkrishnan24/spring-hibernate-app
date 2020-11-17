@@ -1,5 +1,6 @@
 package com.example.jpa.hibernate.hibernateapp.repository;
 
+import com.example.jpa.hibernate.hibernateapp.entity.Course;
 import com.example.jpa.hibernate.hibernateapp.entity.Passport;
 import com.example.jpa.hibernate.hibernateapp.entity.Student;
 import org.slf4j.Logger;
@@ -46,5 +47,25 @@ public class StudentRepository {
         student.setPassport(passport);
 
         entityManager.persist(student);
+    }
+
+    public void insertStudentAndCourseHardCoded() {
+        Student student = new Student("Jack");
+        Course course = new Course("Microservices");
+        entityManager.persist(student);
+        entityManager.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        entityManager.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+        student.addCourse(course);
+        course.addStudent(student);
+
+        entityManager.persist(student);
+        entityManager.persist(course);
     }
 }
