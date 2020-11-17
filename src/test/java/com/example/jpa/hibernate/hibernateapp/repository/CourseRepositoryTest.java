@@ -1,10 +1,14 @@
 package com.example.jpa.hibernate.hibernateapp.repository;
 
 import com.example.jpa.hibernate.hibernateapp.entity.Course;
+import com.example.jpa.hibernate.hibernateapp.entity.Review;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,6 +17,9 @@ class CourseRepositoryTest {
 
     @Autowired
     CourseRepository courseRepository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Test
     void findCourseById() {
@@ -44,5 +51,19 @@ class CourseRepositoryTest {
     @DirtiesContext
     void playWithEntityManager() {
         courseRepository.playWithEntityManager();
+    }
+
+    @Test
+    @Transactional
+    public void retrieveReviewsForCourse() {
+        Course course = courseRepository.findById(10001L);
+        System.out.println(course.getReviews());
+    }
+
+    @Test
+    @Transactional
+    public void retrieveCourseForAReview() {
+        Review review = entityManager.find(Review.class, 50001L);
+        System.out.println(review.getCourse());
     }
 }

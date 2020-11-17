@@ -1,6 +1,7 @@
 package com.example.jpa.hibernate.hibernateapp;
 
 import com.example.jpa.hibernate.hibernateapp.entity.Course;
+import com.example.jpa.hibernate.hibernateapp.entity.Review;
 import com.example.jpa.hibernate.hibernateapp.repository.CourseRepository;
 import com.example.jpa.hibernate.hibernateapp.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class HibernateAppApplication implements CommandLineRunner {
@@ -27,7 +30,11 @@ public class HibernateAppApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        studentRepository.saveStudentWithPassport();
+//        studentRepository.saveStudentWithPassport();
 //        courseRepository.playWithEntityManager();
+        var reviews = new ArrayList<Review>();
+        reviews.add(new Review("5", "Great Hands on stuff"));
+        reviews.add(new Review("5", "Hats off!"));
+        courseRepository.addReviewsForCourse(10003L, reviews);
     }
 }
