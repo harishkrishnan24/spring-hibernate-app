@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
+@MappedSuperclass
+//@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Employee {
     @Id
     @GeneratedValue
