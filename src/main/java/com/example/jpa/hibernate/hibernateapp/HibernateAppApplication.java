@@ -43,10 +43,10 @@ public class HibernateAppApplication implements CommandLineRunner {
 //        Student student = new Student("Jack");
 //        Course course = new Course("Microservices");
 //        studentRepository.insertStudentAndCourse(student, course);
-        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
-
-        logger.info("Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
-        logger.info("Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+//        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
+//        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+//
+//        logger.info("Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
+//        logger.info("Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
     }
 }

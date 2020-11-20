@@ -1,6 +1,7 @@
 package com.example.jpa.hibernate.hibernateapp.repository;
 
 import com.example.jpa.hibernate.hibernateapp.entity.Course;
+import com.example.jpa.hibernate.hibernateapp.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,4 +44,33 @@ class JPQLTest {
         List<Course> resultList = query.getResultList();
         logger.info("select c from Course c -> {}", resultList);
     }
+
+    @Test
+    void findCoursesWithoutStudents() {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where c.students is empty", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    void findCoursesWithAtleastTwoStudents() {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c where size(c.students) >= 2", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    void orderCoursesByNoOfStudents() {
+        TypedQuery<Course> query = entityManager.createQuery("select c from Course c order by size(c.students) desc", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    void studentsWithPassportOfCertainPattern() {
+        TypedQuery<Student> query = entityManager.createQuery("select s from Student s where s.passport.number like '%1234%'", Student.class);
+        List<Student> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
 }
