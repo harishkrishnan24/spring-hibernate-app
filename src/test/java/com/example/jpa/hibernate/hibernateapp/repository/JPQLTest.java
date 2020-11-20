@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import java.util.List;
@@ -70,6 +71,13 @@ class JPQLTest {
     void studentsWithPassportOfCertainPattern() {
         TypedQuery<Student> query = entityManager.createQuery("select s from Student s where s.passport.number like '%1234%'", Student.class);
         List<Student> resultList = query.getResultList();
+        logger.info("Results -> {}", resultList);
+    }
+
+    @Test
+    public void join() {
+        Query query = entityManager.createQuery("select c, s from Course c JOIN c.students s");
+        List resultList = query.getResultList();
         logger.info("Results -> {}", resultList);
     }
 
