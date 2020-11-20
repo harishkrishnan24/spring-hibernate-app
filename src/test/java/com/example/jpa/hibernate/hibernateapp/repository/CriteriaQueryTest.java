@@ -11,10 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @SpringBootTest
@@ -62,6 +59,36 @@ class CriteriaQueryTest {
         Root<Course> courseRoot = cq.from(Course.class);
         Predicate isEmpty = criteriaBuilder.isEmpty(courseRoot.get("students"));
         cq.where(isEmpty);
+
+        TypedQuery<Course> query = entityManager.createQuery(cq.select(courseRoot));
+        List<Course> resultList = query.getResultList();
+        logger.info("Typed Query -> {}", resultList);
+    }
+
+    @Test
+    void join() {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = criteriaBuilder.createQuery(Course.class);
+
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        Join<Object, Object> join = courseRoot.join("students");
+
+        TypedQuery<Course> query = entityManager.createQuery(cq.select(courseRoot));
+        List<Course> resultList = query.getResultList();
+        logger.info("Typed Query -> {}", resultList);
+    }
+
+    @Test
+    void leftJoin() {
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = criteriaBuilder.createQuery(Course.class);
+
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        Join<Object, Object> join = courseRoot.join("students", JoinType.LEFT);
 
         TypedQuery<Course> query = entityManager.createQuery(cq.select(courseRoot));
         List<Course> resultList = query.getResultList();
