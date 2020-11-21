@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
 
@@ -33,7 +36,15 @@ class CourseSpringDataRepositoryTest {
     }
 
     @Test
-    void playingAround() {
+    void sortCourse() {
+        Sort sort = Sort.by( Sort.Direction.DESC,"name");
+        courseSpringDataRepository.findAll(sort);
+    }
+
+    @Test
+    void pagination() {
+        PageRequest pageRequest = PageRequest.of(0, 3);
+        Page<Course> firstPage = courseSpringDataRepository.findAll(pageRequest);
 
     }
 }
