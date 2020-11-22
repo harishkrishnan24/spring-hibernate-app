@@ -42,6 +42,11 @@ public class Course {
 
     private boolean isDeleted;
 
+    @PreRemove
+    private void preRemove() {
+        this.isDeleted = true;
+    }
+
     public Course() {
     }
 
